@@ -42,7 +42,7 @@ def on_closing():
 # ------------------- GUI界面 -------------------
 window = Tk()
 window.title("Windows 定时关机工具")
-window.geometry("400x180")  # 窗口大小
+window.geometry("400x200")  # 窗口大小
 window.resizable(False, False)
 
 # 提示文字
