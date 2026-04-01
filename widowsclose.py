@@ -29,14 +29,27 @@ def start_shutdown():
     except ValueError:
         messagebox.showerror("错误", "请输入有效数字！")
 
+
+def unshutdown_timer():
+    # 执行系统关机命令
+    os.system("shutdown /a")
+    # 使用线程安全的方式更新GUI
+    try:
+        window.after(0, lambda: var.set("已取消自动关机！"))
+    except:
+        pass  # 如果窗口已关闭，忽略错误
+
 # 取消关机
 def cancel_shutdown():
-    os.system("shutdown /a")
-    var.set("已取消自动关机！")
+    threading.Thread(target=unshutdown_timer).start()
+    #os.system("shutdown /a")
+    #var.set("已取消自动关机！")
 
 def on_closing():
     if messagebox.askokcancel("退出", "确定要退出吗？"):
-        cancel_shutdown()  # 退出前取消定时关机
+        # 直接取消关机，不启动新线程
+        os.system("shutdown /a")
+        var.set("已取消自动关机！")
         window.destroy()
 
 # ------------------- GUI界面 -------------------
