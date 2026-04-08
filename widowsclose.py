@@ -1,6 +1,8 @@
 import os
 import time
 import threading
+import serial
+
 from tkinter import Tk, Label, Entry, Button, StringVar, messagebox
 
 # 关机任务函数
